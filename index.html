@@ -41,6 +41,7 @@ select:focus, input:focus { outline: none; border-color: var(--red); box-shadow:
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px; padding: 10px 16px; border: none; border-radius: 6px; font-size: .85rem; font-weight: 600; cursor: pointer; min-height: 44px; transition: all .2s; }
 .btn-red { background: var(--red); color: #fff; }
 .btn-blue { background: var(--blue); color: #fff; }
+.btn-green { background: #27ae60; color: #fff; }
 .btn-outline { background: var(--card); color: var(--red); border: 2px solid var(--red); }
 .btn-sm { padding: 6px 10px; font-size: .73rem; min-height: 36px; }
 .btn-block { width: 100%; margin-top: 8px; }
@@ -265,6 +266,7 @@ select:focus, input:focus { outline: none; border-color: var(--red); box-shadow:
 @media(max-width:500px){.pf-row,.pf-row3{grid-template-columns:1fr;}.scene-btns{gap:4px;}.pers-panel{flex-direction:column;}}
 
 .adj-inp{flex:1;min-width:42px;padding:5px 6px;font-size:.75rem;}
+@media print{.tab-bar,.sidebar,#paramPanel,#scenePanel,#forcePanel,.tab-content>div:not(#tab10),.btn-blue,.btn-green{display:none!important;}#planOutput{display:block!important;margin:0;padding:0;max-width:100%;}#planOutput *{font-size:12px;line-height:1.5;}}
 </style>
 </head>
 <body>
@@ -705,7 +707,7 @@ select:focus, input:focus { outline: none; border-color: var(--red); box-shadow:
  <!-- 参数面板（自适应） -->
  <div class="param-panel" id="paramPanel" style="display:none;">
   <div class="param-fields" id="paramFields"></div>
-  <div style="margin-top:10px;text-align:center;"><button class="btn btn-blue" onclick="genDecisionPlan()">🚀 生成方案</button></div>
+  <div style="margin-top:10px;text-align:center;"><button class="btn btn-blue" onclick="genDecisionPlan()">🚀 生成方案</button> <button class="btn btn-green" onclick="exportPlanPDF()">📥 导出PDF</button></div>
  </div>
  
  <!-- 方案输出 -->
@@ -4993,6 +4995,8 @@ var TANK_DIMS={
   {V:100,D:3.4,L:11.5},{V:150,D:3.8,L:14.0},{V:200,D:4.0,L:16.5}
  ]
 }
+
+function exportPlanPDF(){var o=document.getElementById('planOutput');if(!o||!o.textContent.trim()||o.textContent.indexOf('未生成')>=0){alert('请先生成决策方案，再导出PDF');return;}var w=window.open('','_print','width=900,height=700');w.document.write('<!DOCTYPE html><html><head><meta charset="utf-8"><title>消防决策方案</title><style>*{font-family:sans-serif;box-sizing:border-box}body{max-width:800px;margin:0 auto;padding:20px;line-height:1.6;font-size:13px}table{width:100%;border-collapse:collapse;margin:8px 0;font-size:12px}td,th{padding:4px 6px;border:1px solid #ccc}th{background:#f0f0f0}@media print{@page{margin:10mm}body{padding:0}}</style></head><body>'+o.innerHTML+'</body></html>');w.document.close();setTimeout(function(){w.print();w.close();},600);}
 
 </script>
 </body>
