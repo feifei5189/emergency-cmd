@@ -446,7 +446,7 @@ select:focus, input:focus { outline: none; border-color: var(--red); box-shadow:
  <select id="uploadCat" style="flex:0.6;min-width:90px;"><option value="">📂 文件类型（可选）</option></select>
  <select id="uploadScene" style="flex:0.6;min-width:90px;"><option value="">🎯 场景（可选）</option></select>
  <label for="fileUpload" class="btn btn-blue" style="flex:1;text-align:center;">📤 上传文件</label>
- <input type="file" id="fileUpload" multiple accept=".csv,.xlsx,.xls,.docx,.doc,.pdf,.txt,.jpg,.jpeg,.png,.gif,.webp,.bmp" style="display:none;" onchange="handleFileUpload(this)">
+ <input type="file" id="fileUpload" multiple accept="*/*" style="display:none;" onchange="handleFileUpload(this)">
  <button class="btn btn-outline btn-sm" onclick="toggleSelectAll()">☑️ 全选</button>
  <button class="btn btn-red btn-sm" onclick="deleteSelectedFiles()">🗑️</button>
  </div>
