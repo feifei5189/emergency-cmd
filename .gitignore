@@ -1,0 +1,8 @@
+node_modules/
+_obf_*.js
+_t.js
+*.log
+build.js
+package.json
+package-lock.json
+backups/
